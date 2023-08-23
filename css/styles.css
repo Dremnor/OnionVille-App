@@ -23,6 +23,10 @@ p{
     color: #f4f3f6; 
 }
 
+img{
+  object-fit: contain
+}
+
 video {
   width: 100%;
   height: auto;

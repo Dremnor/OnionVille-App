@@ -106,7 +106,7 @@ $index = 0;
                 <?php foreach($items as $item): ?>
                 <div class="card text-center color3-bg mt-4 mx-2" style="width: 12rem;">
                     <div class="image_card">   
-                        <img class="card-img-top mx-auto my-auto " style="width: 3rem;" src="/php/uploads/icons/<?=$item['image']?>" alt="Card image cap">
+                        <img class="card-img-top mx-auto my-auto "  style="height: 11rem; width: 11rem" src="/php/uploads/icons/<?=$item['image']?>" alt="Card image cap">
                     </div>
                     <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">
                     <div class="card-body">

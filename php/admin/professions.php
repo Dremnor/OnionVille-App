@@ -114,7 +114,7 @@ if (count($_POST) > 1) {
                         <?php
                         $index = 0;
                         foreach ($professions as $prof) {
-                            if (($prof['id'] != 11 && $prof['id'] != 12 && $prof['id'] != 13) || hasProfession('Admin')) {
+                            if ( !in_array($prof['id'], PROFESSIONS_EXCLUDE)  || hasProfession('Admin')) {
                                 echo "<div class=\"col-sm\">";
                                 echo "<input type=\"checkbox\" id=\"prof_" . $prof['id'] . "\" name=\"prof_" . $prof['id'] . "\" value=\"" . $prof['name'] . "\">";
                                 echo "<label class=\"m-1\" for=\"prof_" . $prof['id'] . "\">" . $prof['name'] . "</label><br>";

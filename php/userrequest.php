@@ -77,10 +77,6 @@ $requests = $DB->getAllUserRequests($user['id']);
                                 <div class="card-body">
                                     <h5 class="card-title color4"><?= $item['name'] ?></h5>
                                     <div class="color5">Ilość: <?=$request['amount'] ?></div>
-                                    <div class="color5">
-                                        <h5>Zamawia</h5>
-                                        <?= $requester ?>
-                                    </div>
                                     </p>
 
                                     <div class="color5">

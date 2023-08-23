@@ -17,7 +17,7 @@ if (count($_POST) > 0 && count($_FILES) > 0) {
 
 
     echo "<pre>";
-    var_dump($_POST); 
+    var_dump($_POST);
     echo "</pre>";
 
 
@@ -51,12 +51,11 @@ if (count($_POST) > 0 && count($_FILES) > 0) {
             $uploadOk = 0;
         }
 
-        if ($uploadOk == 1){
+        if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                $DB->addItemToDatabase($_POST['name'],$_FILES["fileToUpload"]["name"],$DB->getProfessionId($_POST['profession']));
-              } 
+                $DB->addItemToDatabase($_POST['name'], $_FILES["fileToUpload"]["name"], $DB->getProfessionId($_POST['profession']));
+            }
         }
-
     }
 }
 ?>
@@ -146,14 +145,16 @@ if (count($_POST) > 0 && count($_FILES) > 0) {
                         <?php
                         $index = 0;
                         foreach ($professions as $prof) {
-                            echo "<div class=\"col-sm\">";
-                            echo "<input type=\"radio\" id=\"prof_" . $prof['id'] . "\" name=\"profession\" value=\"" . $prof['name'] . "\">";
-                            echo "<label class=\"m-1\" for=\"prof_" . $prof['id'] . "\">" . $prof['name'] . "</label><br>";
-                            echo "</div>";
-                            $index++;
-                            if ($index % 3 == 0) {
+                            if (!in_array($prof['id'], PROFESSIONS_EXCLUDE)  || (hasProfession('Admin') || hasProfession('Lider')) && !in_array($prof['id'], PROFESSIONS_EXCLUDE_OFICER)) {
+                                echo "<div class=\"col-sm\">";
+                                echo "<input type=\"radio\" id=\"prof_" . $prof['id'] . "\" name=\"profession\" value=\"" . $prof['name'] . "\">";
+                                echo "<label class=\"m-1\" for=\"prof_" . $prof['id'] . "\">" . $prof['name'] . "</label><br>";
                                 echo "</div>";
-                                echo "<div class=\"row\">";
+                                $index++;
+                                if ($index % 3 == 0) {
+                                    echo "</div>";
+                                    echo "<div class=\"row\">";
+                                }
                             }
                         }
                         if ($index % 3 != 0) {

@@ -91,7 +91,7 @@ if (isset($_POST['request'])) {
     <div>
 
         <div class="mt-4 mw-50 md-50 p-5 rounded-3 center color1-bg text-center mx-auto jumbo-standard">
-            <?php if (!isset($_POST['profession']) && !isset($_GET['selected_id'])) : ?>
+            <?php //if (!isset($_POST['profession']) && !isset($_GET['selected_id'])) : ?>
                 <form class="color4" method="post">
                     <h1 class="mt-5">WYKONAWCA</h1>
                     <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
@@ -99,7 +99,7 @@ if (isset($_POST['request'])) {
                     <select id="user" name="profession" size="1">
                         <?php
                         foreach ($professions as $profession) {
-                            if ($profession['id'] != 11) {
+                            if (!in_array($profession['id'], REQUEST_ITEM_PROFESSIONS_EXCLUDE)) {
                                 echo "<option value=\"" . $profession['id'] . "\">" . $profession['name'] . "</option>";
                             }
                         }
@@ -108,7 +108,7 @@ if (isset($_POST['request'])) {
                     </br>
                     <input class="mt-3" type="submit" value="Szukaj">
                 </form>
-            <?php endif; ?>
+            <?php //endif; ?>
 
             <?php if (isset($_POST['profession'])) : ?>
                 <h1 class="mt-5">DOSTEPNE PRZEDMIOTY</h1>
@@ -116,10 +116,10 @@ if (isset($_POST['request'])) {
                 <div class="container text-start mx-auto">
                     <div class="row mx-auto">
                         <?php foreach ($items as $item) : ?>
-                            <?php if ($item['profession_id'] == $_POST['profession'] && $item['status']) : ?>
+                            <?php if ($item['profession_id'] == $_POST['profession'] && $item['status'] ) : ?>
                                 <div class="card text-center color3-bg mt-4 mx-2" style="width: 12rem;">
                                     <div class="image_card">
-                                        <img class="card-img-top mx-auto my-auto " style="width: 3rem;" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
+                                        <img class="card-img-top mx-auto my-auto " style="height: 11rem; width: 11rem" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
                                     </div>
                                     <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">
                                     <div class="card-body">
@@ -147,7 +147,7 @@ if (isset($_POST['request'])) {
                     <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
                     <div class="card text-center color3-bg mt-4 mx-auto" style="width: 12rem;">
                         <div class="image_card">
-                            <img class="card-img-top mx-auto my-auto " style="width: 3rem;" src="/php/uploads/icons/<?= $selected_item['image'] ?>" alt="Card image cap">
+                            <img class="card-img-top mx-auto my-auto " style="height: 11rem; width: 11rem" src="/php/uploads/icons/<?= $selected_item['image'] ?>" alt="Card image cap">
                         </div>
                         <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">
                         <div class="card-body">

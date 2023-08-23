@@ -24,6 +24,10 @@ if (isset($_POST['item_name'])) {
     $_SESSION['item_name'] = $_POST['item_name'];
 }
 
+if (isset($_POST['item_type'])) {
+    $_SESSION['item_type'] = $_POST['item_type'];
+}
+
 ?>
 
 <!doctype html>
@@ -96,6 +100,13 @@ if (isset($_POST['item_name'])) {
                     <?php else : ?>
                         <input type="text" name="item_name">
                     <?php endif; ?>
+
+                    <label class="color5" for="item_type">Typ:</label>
+                    <select name="item_type">
+                        <option value="1" <?= (isset($_SESSION['item_type']) && $_SESSION['item_type'] == 1 ? "selected" : "") ?>>Wszystkie</option>
+                        <option value="2" <?= (isset($_SESSION['item_type']) && $_SESSION['item_type'] == 2 ? "selected" : "") ?>>Przedmioty</option>
+                        <option value="3" <?= (isset($_SESSION['item_type']) && $_SESSION['item_type'] == 3 ? "selected" : "") ?>>Zadania</option>
+                    </select>
                     <input type="submit" value="szukaj">
                 </form>
             </div>
@@ -105,25 +116,35 @@ if (isset($_POST['item_name'])) {
                     <?php foreach ($items as $item) : ?>
                         <?php
                         $namecheck = true;
+                        $typecheck = true;
                         if (isset($_SESSION['item_name'])) {
                             $namecheck = str_contains(strtolower($item['name']), strtolower($_SESSION['item_name']));
                         }
+                        if (isset($_SESSION['item_type'])) {
+                            if ($_SESSION['item_type'] == 3 && $item['profession_id'] != 18) {
+                                $typecheck = false;
+                            }
+
+                            if ($_SESSION['item_type'] == 2 && $item['profession_id'] == 18) {
+                                $typecheck = false;
+                            }
+                        }
                         ?>
-                        <?php if ($item['status'] && $namecheck) : ?>
+                        <?php if ($item['status'] && $namecheck && $typecheck) : ?>
                             <div class="card text-center color3-bg mt-4 mx-2" style="width: 12rem;">
                                 <div class="image_card">
-                                    <img class="card-img-top mx-auto my-auto " style="width: 3rem;" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
+                                    <img class="card-img-top mx-auto my-auto " style="height: 11rem; width: 11rem" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
                                 </div>
                                 <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">
                                 <div class="card-body">
                                     <h5 class="card-title color4"><?= $item['name'] ?></h5>
                                     <div>
-                                        <?php if (isset($_SESSION['selected_id']) && $_SESSION['selected_id'] == $item['id'] ) : ?>
+                                        <?php if (isset($_SESSION['selected_id']) && $_SESSION['selected_id'] == $item['id']) : ?>
                                             <a href="?selected_id=<?= $item['id'] ?>" class="btn btn-danger disabled">Wybrany</a>
                                         <?php else : ?>
                                             <a href="?selected_id=<?= $item['id'] ?>" class="btn btn-success">Wybierz</a>
                                         <?php endif; ?>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -146,6 +167,11 @@ if (isset($_POST['item_name'])) {
                 <textarea id="area" name="task_desc" rows="4" cols="50"></textarea></br>
                 <label class="mt-3 color5" for="task_desc">Wymagana ilość(0 = brak ilośći):</label></br>
                 <input type="number" value="0" name="amount">
+                <h1 class="mt-5">Lokalizacja</h1>
+                <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
+                <label class="mt-3 color5" for="task_desc">Lokalizacja(pozycja albo opis):</label></br>
+                <textarea id="area" name="task_desc" rows="4" cols="50"></textarea></br>
+
                 <input type="submit" value="Wystaw">
             </form>
         </div>
