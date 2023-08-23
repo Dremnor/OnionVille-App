@@ -1,0 +1,142 @@
+body{
+    background-color: #212632;
+}
+
+h1{
+  color: #c4c2e0;
+}
+h2{
+  color: #c4c2e0;
+}
+h3{
+  color: #c4c2e0;
+}
+h4{
+  color: #c4c2e0;
+}
+h5{
+  color: #c4c2e0;
+}
+
+
+p{
+    color: #f4f3f6; 
+}
+
+video {
+  width: 100%;
+  height: auto;
+}
+
+.side-menu{
+  width: 20%;
+}
+
+.side-menu-right{
+  text-align: center;
+  margin-right: 2%;
+  float: right;
+}
+
+.side-menu-left{
+  text-align: center;
+  margin-left: 2%;
+  float: left;
+}
+
+.jumbo-standard{
+  width: 40%;
+}
+
+.buttonStyle {
+  width: 100%;
+  margin-top:5px;
+	box-shadow:inset 0px -3px 7px 0px #233740;
+	background-color:#383d40;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#c4c2e0;
+	font-family:Arial;
+	font-size:30px;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+}
+.buttonStyle:hover {
+	background-color:#0e2b45;
+}
+.buttonStyle:active {
+	position:relative;
+	top:1px;
+}
+
+.buttonStyleCard {
+  width: 100%;
+  margin-top:5px;
+	box-shadow:inset 0px -3px 7px 0px #233740;
+	background-color:#383d40;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#c4c2e0;
+	font-family:Arial;
+	font-size:16px;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+}
+.buttonStyleCard:hover {
+	background-color:#0e2b45;
+}
+.buttonStyleCard:active {
+	position:relative;
+	top:1px;
+}
+
+
+a:link, a:visited, a:hover, a:active{
+  text-decoration: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+.image_card {
+  height: 12rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.card-status{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: #000000;
+  border-style: solid;
+  border-width: 2;
+  border-color: #263666;
+  border-radius: 50%;
+  width: 37px;
+  height: 37px;
+  text-align: center;
+  
+}
+
+.color1-bg {background-color: #000000;}
+.color2-bg {background-color: #212632;}
+.color3-bg {background-color: #6c7083;}
+.color4-bg {background-color: #c4c2e0;}
+.color5-bg {background-color: #f4f3f6;}
+
+.color1 {color: #000000;}
+.color2 {color: #212632;}
+.color3 {color: #6c7083;}
+.color4 {color: #c4c2e0;}
+.color5 {color: #f4f3f6;}
+.color6 {color: #CC0033;}
+.color7 {color: #006600;}
+
