@@ -104,9 +104,9 @@ $index = 0;
         <div class="container text-start mx-auto">
             <div class="row mx-auto">
                 <?php foreach($items as $item): ?>
-                <div class="card text-center color3-bg mt-4 mx-2" style="width: 12rem;">
+                <div class="card text-center color3-bg mt-4 mx-auto card-border" style="width: 12rem;">
                     <div class="image_card">   
-                        <img class="card-img-top mx-auto my-auto "  style="height: 11rem; width: 11rem" src="/php/uploads/icons/<?=$item['image']?>" alt="Card image cap">
+                        <img class="card-img-top mx-auto image-border image_card"  style="height: 10rem; width: 10rem" src="/php/uploads/icons/<?=$item['image']?>" alt="Card image cap">
                     </div>
                     <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">
                     <div class="card-body">

@@ -36,7 +36,25 @@ class DB
                 'discord_avatar' => $userdata['avatar'],
                 'discord_email' => $userdata['email']
             ]);
-            echo 'inserted successfully';
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
+
+    public function addBoardTaskToDatabase($data)
+    {
+        $sql = "INSERT INTO board (item_id,description,location,creator_id,users_collect,amount) VALUES 
+                                  (:item_id,:description,:location,:creator_id,:users_collect,:amount)";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                'item_id' => $data['item_id'],
+                'description' => $data['description'],
+                'location' => $data['location'],
+                'creator_id' => $data['creator_id'],
+                'users_collect' => $data['users_collect'],
+                'amount' => $data['amount']
+            ]);
         } catch (Exception $e) {
             echo $e;
         }
@@ -351,6 +369,20 @@ class DB
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$data, $id]);
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+    public function setFinishDate($id)
+    {
+        $sql = "UPDATE requests SET finished_at=? WHERE id=?";
+        $date = date('Y-m-d H:i:s');
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$date,$id]);
             return true;
         } catch (Exception $e) {
             echo $e;

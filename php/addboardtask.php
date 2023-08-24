@@ -131,14 +131,14 @@ if (isset($_POST['item_type'])) {
                         }
                         ?>
                         <?php if ($item['status'] && $namecheck && $typecheck) : ?>
-                            <div class="card text-center color3-bg mt-4 mx-2" style="width: 12rem;">
+                            <div class="card text-center color3-bg mt-4 mx-auto card-border" style="width: 12rem;">
                                 <div class="image_card">
-                                    <img class="card-img-top mx-auto my-auto " style="height: 11rem; width: 11rem" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
+                                    <img class="card-img-top mx-auto image-border image_card" style="height: 10rem; width: 10rem" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
                                 </div>
                                 <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">
                                 <div class="card-body">
                                     <h5 class="card-title color4"><?= $item['name'] ?></h5>
-                                    <div>
+                                    <div class="card-button">
                                         <?php if (isset($_SESSION['selected_id']) && $_SESSION['selected_id'] == $item['id']) : ?>
                                             <a href="?selected_id=<?= $item['id'] ?>" class="btn btn-danger disabled">Wybrany</a>
                                         <?php else : ?>
@@ -169,8 +169,8 @@ if (isset($_POST['item_type'])) {
                 <input type="number" value="0" name="amount">
                 <h1 class="mt-5">Lokalizacja</h1>
                 <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
-                <label class="mt-3 color5" for="task_desc">Lokalizacja(pozycja albo opis):</label></br>
-                <textarea id="area" name="task_desc" rows="4" cols="50"></textarea></br>
+                <label class="mt-3 color5" for="task_loc">Lokalizacja(pozycja albo opis):</label></br>
+                <textarea id="area" name="task_loc" rows="4" cols="50"></textarea></br>
 
                 <input type="submit" value="Wystaw">
             </form>

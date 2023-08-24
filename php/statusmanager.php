@@ -31,6 +31,7 @@ switch ($mode) {
         break;
     case 3:
         $DB->setRequestStatus(6, $id);
+        $DB->setFinishDate($id);
         break;
     case 4:
         $DB->setRequestStatus(7, $id);

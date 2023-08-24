@@ -71,9 +71,9 @@ $requests = $DB->getAllRequests();
                             $requester = $DB->getUserById($request['requester_id'])['discord_global_name'];
                             $item = $DB->getitem($request['item_id']);
                             ?>
-                            <div class="card text-center color3-bg mt-4 mx-2" style="width: 19rem;">
+                            <div class="card text-center color3-bg mt-4 mx-2 card-border" style="width: 19rem;">
                                 <div class="image_card">
-                                    <img class="card-img-top mx-auto my-auto " style="width: 4rem;" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
+                                    <img class="card-img-top mx-auto image-border image_card" style="width: 10rem; height:10rem;" src="/php/uploads/icons/<?= $item['image'] ?>" alt="Card image cap">
                                     <div class="card-status"><?= $status['status_code'] ?></div>
                                 </div>
                                 <hr class="border rounded border-warning border-2 opacity-75 w-75 mx-auto">

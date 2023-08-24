@@ -32,6 +32,37 @@ video {
   height: auto;
 }
 
+.image-border{
+  background-color: #383d40;
+  margin-top: 1rem;
+  border:#263666;
+  border-radius: 1rem;
+  border-style:ridge;
+  border-width: 8px;
+}
+
+.card-border{
+  border: white;
+  border-radius: 1rem;
+  border-style:ridge;
+  border-width: 3px;
+}
+
+.card-border h5{
+  vertical-align: bottom;
+  text-align: center;
+  text-shadow: black;
+  font-size: medium;
+  height: 2rem;
+  color: white;
+  margin-bottom: 0;
+  margin-top: 0.3rem;
+}
+
+.card-button {
+  margin-top: auto;
+}
+
 .side-menu{
   width: 20%;
 }
@@ -109,12 +140,6 @@ a{
   text-decoration: none;
 }
 
-.image_card {
-  height: 12rem;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
 .card-status{
   position: absolute;
   top: 1rem;
