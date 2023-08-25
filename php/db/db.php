@@ -43,8 +43,8 @@ class DB
 
     public function addBoardTaskToDatabase($data)
     {
-        $sql = "INSERT INTO board (item_id,description,location,creator_id,users_collect,amount) VALUES 
-                                  (:item_id,:description,:location,:creator_id,:users_collect,:amount)";
+        $sql = "INSERT INTO board (item_id,description,location,creator_id,users_collect,amount,active) VALUES 
+                                  (:item_id,:description,:location,:creator_id,:users_collect,:amount,:active)";
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
@@ -52,8 +52,9 @@ class DB
                 'description' => $data['description'],
                 'location' => $data['location'],
                 'creator_id' => $data['creator_id'],
-                'users_collect' => $data['users_collect'],
-                'amount' => $data['amount']
+                'users_collect' => true,
+                'amount' => $data['amount'],
+                'active' => true
             ]);
         } catch (Exception $e) {
             echo $e;

@@ -28,6 +28,27 @@ if (isset($_POST['item_type'])) {
     $_SESSION['item_type'] = $_POST['item_type'];
 }
 
+
+if (isset($_POST['task_desc'])){
+
+    $user = $DB->getUser($_SESSION['id']);
+    $item = $DB->getItem($_SESSION['selected_id']);
+
+    $data['item_id'] = $_SESSION['selected_id'];
+    $data['description'] = $_POST['task_desc'];
+    $data['location'] = $_POST['task_loc'];
+    $data['amount'] = $_POST['amount'];
+    $data['creator_id'] = $user['id'];
+
+    $DB->addBoardTaskToDatabase($data);
+
+    sendDiscordMessageEmbed($item['name'], $_POST['task_desc'],$item['image'], "<@".$user['discord_id'].">",$_POST['task_loc'],$_POST['amount']);
+
+    unset($_SESSION['selected_id']);
+    unset($_SESSION['item_name']);
+    unset($_SESSION['item_type']);
+}
+
 ?>
 
 <!doctype html>
@@ -160,20 +181,22 @@ if (isset($_POST['item_type'])) {
                     <?php endforeach; ?>
                 </div>
             </div>
-            <h1 class="mt-5">Ilość i Treść</h1>
-            <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
-            <form method="post">
-                <label class="mt-3 color5" for="task_desc">Opis zadania:</label></br>
-                <textarea id="area" name="task_desc" rows="4" cols="50"></textarea></br>
-                <label class="mt-3 color5" for="task_desc">Wymagana ilość(0 = brak ilośći):</label></br>
-                <input type="number" value="0" name="amount">
-                <h1 class="mt-5">Lokalizacja</h1>
+            <? if (isset($_SESSION['selected_id'])) : ?>
+                <h1 class="mt-5">Ilość i Treść</h1>
                 <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
-                <label class="mt-3 color5" for="task_loc">Lokalizacja(pozycja albo opis):</label></br>
-                <textarea id="area" name="task_loc" rows="4" cols="50"></textarea></br>
+                <form method="post">
+                    <label class="mt-3 color5" for="task_desc">Opis zadania:</label></br>
+                    <textarea id="area" name="task_desc" rows="4" cols="50"></textarea></br>
+                    <label class="mt-3 color5" for="amount">Wymagana ilość(0 = brak ilośći):</label></br>
+                    <input type="number" value="0" name="amount">
+                    <h1 class="mt-5">Lokalizacja</h1>
+                    <hr class="border border-light border-2 opacity-75 w-75 mx-auto">
+                    <label class="mt-3 color5" for="task_loc">Lokalizacja(pozycja albo opis):</label></br>
+                    <textarea id="area" name="task_loc" rows="4" cols="50"></textarea></br>
 
-                <input type="submit" value="Wystaw">
-            </form>
+                    <input type="submit" name="addbo" value="Wystaw">
+                </form>
+            <? endif; ?>
         </div>
 
 
@@ -185,3 +208,6 @@ if (isset($_POST['item_type'])) {
 <?php
 $DB->closeDBConnection();
 ?>
+
+
+
