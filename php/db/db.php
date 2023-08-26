@@ -169,6 +169,20 @@ class DB
         }
     }
 
+    public function getAllBoardTasks()
+    {
+        $sql = "SELECT * FROM board";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo $e;
+            return true;
+        }
+    }
+
     public function getAllUserRequests($id)
     {
         $sql = "SELECT * FROM requests WHERE requester_id=:requester_id ";
@@ -188,6 +202,22 @@ class DB
     public function getRequests($id)
     {
         $sql = "SELECT * FROM requests WHERE id=:id ";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                'id' => $id
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo $e;
+            return true;
+        }
+    }
+
+    public function getBoardTask($id)
+    {
+        $sql = "SELECT * FROM board WHERE id=:id ";
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
@@ -367,6 +397,32 @@ class DB
     public function setVerify($data, $id)
     {
         $sql = "UPDATE users SET verify=? WHERE id=?";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$data, $id]);
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+    public function setTaskUsers($data, $id)
+    {
+        $sql = "UPDATE board SET users_list=? WHERE id=?";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$data, $id]);
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+    public function setTaskAprUsers($data, $id)
+    {
+        $sql = "UPDATE board SET users_apr=? WHERE id=?";
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$data, $id]);

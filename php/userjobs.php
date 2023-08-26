@@ -26,7 +26,7 @@ $requests = $DB->getAllRequests();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&H App Admin</title>
+    <title>H&H App</title>
     <meta name="description" content="A simple app for villager.">
     <meta name="author" content="Dremnor">
 

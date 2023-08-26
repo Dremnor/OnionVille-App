@@ -27,8 +27,8 @@ if (isset($_POST['request'])) {
     $selected_item = $DB->getItem($_POST['selected_id']);
     $profession = $DB->getProfession($_POST['selected_profession']);
     $DB->addRequestToDatabase($user['id'],$_POST['selected_id'],$_POST['amount'],$_POST['selected_profession']);
-    sendDiscordMessage($user['discord_global_name']." wystawił nowe zamówienie na ".$selected_item['name'].".".$profession['role']);
-} 
+    sendDiscordMessageNewRequest($selected_item['name'],$profession['role'],$user['discord_id'],$_POST['amount']);
+}
 
 ?>
 
@@ -39,7 +39,7 @@ if (isset($_POST['request'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&H App Admin</title>
+    <title>H&H App</title>
     <meta name="description" content="A simple app for villager.">
     <meta name="author" content="Dremnor">
 

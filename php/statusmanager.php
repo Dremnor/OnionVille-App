@@ -22,12 +22,12 @@ switch ($mode) {
         $user_crafter = $DB->getUser($_SESSION['id']);
         $DB->setRequestStatus(2, $id);
         $DB->setRequestCrafter($user_crafter['id'], $id);
-        sendDiscordMessage("<@".$user_requester['discord_id']."> twoje zamówienie na ".$item['name']." zostało pobrane do wykonania przez <@".$user_crafter['discord_id'].">");
+        sendDiscordMessageTookRequest($item['name'],$user_crafter['discord_id'],$user_requester['discord_id']);
         break;
     case 2:
         $DB->setRequestStatus(3, $id);
         $user_crafter = $DB->getUserById($request['crafter_id']);
-        sendDiscordMessage("<@".$user_requester['discord_id']."> twoje zamówienie na ".$item['name']." jest gotowe do odebrania od <@".$user_crafter['discord_id'].">");
+        sendDiscordMessageFinishedRequest($item['name'],$user_crafter['discord_id'],$user_requester['discord_id']);
         break;
     case 3:
         $DB->setRequestStatus(6, $id);

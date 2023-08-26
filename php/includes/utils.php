@@ -66,7 +66,7 @@ function printMenuButtons()
         $buttons .= "<a href=\"/php/addboardtask.php\" class=\"buttonStyle\">Dodaj na Tablice</a>";
     }
     if (hasProfession('Admin') || hasProfession('Oficer') || hasProfession('Lider')) {
-        $buttons .= "<a href=\"/php/admin/admin.php\" class=\"buttonStyle color6\">Admin Panel</a>";
+        $buttons .= "<a href=\"/php/admin/admin.php\" class=\"buttonStyle color6\">Panel</a>";
     }
 
 
@@ -117,14 +117,37 @@ function printStatus()
 {
 }
 
-function sendDiscordMessage($message)
+function sendDiscordMessageNewRequest($item_name, $role, $player, $amount)
 {
     $webhookurl = NOTIFICATION_HOOK;
 
     $json_data = json_encode([
-        "content" => $message,
-        "username" => "OnionVille App",
-        "tts" => false
+        "content" => "",
+        "tts" => false,
+        "embeds" => [
+            [
+                "id" => 652627557,
+                "title" => "NOWE ZAMÓWIENIE!",
+                "description" => "Mieszkaniec <@" . $player . "> wystawił zamówienie na " . $item_name,
+                "color" => 3456795,
+                "fields" => [
+                    [
+                        "id" => 670306411,
+                        "name" => "Ilość:",
+                        "value" => $amount
+                    ],
+                    [
+                        "id" => 670306411,
+                        "name" => "Crafterzy:",
+                        "value" => $role
+                    ]
+                ],
+                "url" => "http://onionville.space/php/requestlist.php"
+            ]
+        ],
+        "components" => [],
+        "actions" => [],
+        "username" => "OnionVille App"
     ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     $ch = curl_init($webhookurl);
@@ -139,7 +162,78 @@ function sendDiscordMessage($message)
     curl_close($ch);
 }
 
-function sendDiscordMessageEmbed($title, $desc, $image, $mention_crea, $location,$amount)
+function sendDiscordMessageTookRequest($item_name, $player, $reciv)
+{
+    $webhookurl = NOTIFICATION_HOOK;
+
+    $json_data = json_encode([
+        "content" => "",
+        "tts" => false,
+        "embeds" => [
+            [
+                "id" => 652627557,
+                "title" => "ZAMÓWIENIE POBRANE!",
+                "description" => "Crafter <@".$player."> rozpoczął produkcje " . $item_name . " dla <@". $reciv.">",
+                "color" => 3456795,
+                "fields" => [
+                ],
+                "url" => "http://onionville.space/php/userrequest.php"
+            ]
+        ],
+        "components" => [],
+        "actions" => [],
+        "username" => "OnionVille App"
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+    $ch = curl_init($webhookurl);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+}
+
+function sendDiscordMessageFinishedRequest($item_name, $player, $reciv)
+{
+    $webhookurl = NOTIFICATION_HOOK;
+
+    $json_data = json_encode([
+        "content" => "",
+        "tts" => false,
+        "embeds" => [
+            [
+                "id" => 652627557,
+                "title" => "ZAMÓWIENIE PGOTOWE DO ODEBRANIA!",
+                "description" => "<@". $reciv.">! Twój ".$item_name." jest gotowy do odebrania od <@".$player.">",
+                "color" => 3456795,
+                "fields" => [
+                ],
+                "url" => "http://onionville.space/php/userrequest.php"
+            ]
+        ],
+        "components" => [],
+        "actions" => [],
+        "username" => "OnionVille App"
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+    $ch = curl_init($webhookurl);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+}
+
+
+function sendDiscordMessageEmbed($title, $desc, $image, $mention_crea, $location, $amount)
 {
     $webhookurl = NOTIFICATION_HOOK;
     $json_data = json_encode([
@@ -148,7 +242,7 @@ function sendDiscordMessageEmbed($title, $desc, $image, $mention_crea, $location
         "embeds" => [
             [
                 "image" => [
-                    "url" => "http://onionville.space/php/uploads/icons/".$image
+                    "url" => "http://onionville.space/php/uploads/icons/" . $image
                 ],
                 "id" => 652627557,
                 "title" => $title,
@@ -176,13 +270,13 @@ function sendDiscordMessageEmbed($title, $desc, $image, $mention_crea, $location
                         "value" => "<@&845013813019148308>"
                     ]
                 ],
-                "url" => "http://onionville.space/php/board.php" 
+                "url" => "http://onionville.space/php/board.php"
             ]
         ],
         "components" => [],
         "actions" => [],
         "username" => "OnionVille App"
-    ]);
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     $ch = curl_init($webhookurl);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
